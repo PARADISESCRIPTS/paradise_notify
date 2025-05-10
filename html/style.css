@@ -1,0 +1,330 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.notifications {
+    position: fixed;
+    width: 350px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Top positions */
+.notifications.top {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.notifications.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.notifications.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+/* Bottom positions */
+.notifications.bottom {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.notifications.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+.notifications.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+/* Center positions */
+.notifications.center-right {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.notifications.center-left {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.notification {
+    background: rgba(5, 5, 5, 0.98);
+    border-radius: 12px;
+    padding: 16px;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 80px;
+}
+
+/* Position-specific animations */
+.notifications.top-right .notification,
+.notifications.bottom-right .notification,
+.notifications.center-right .notification {
+    transform: translateX(120%);
+    animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.notifications.top-left .notification,
+.notifications.bottom-left .notification,
+.notifications.center-left .notification {
+    transform: translateX(-120%);
+    animation: slideInLeft 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.notifications.top .notification,
+.notifications.bottom .notification {
+    transform: translateY(-120%);
+    animation: slideInTop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.01), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}
+
+.notification.success {
+    border-left-color: #4CAF50;
+    background: linear-gradient(to right, rgba(76, 175, 80, 0.4), rgba(5, 5, 5, 0.98));
+}
+
+.notification.error {
+    border-left-color: #F44336;
+    background: linear-gradient(to right, rgba(244, 67, 54, 0.4), rgba(5, 5, 5, 0.98));
+}
+
+.notification.info {
+    border-left-color: #2196F3;
+    background: linear-gradient(to right, rgba(33, 150, 243, 0.4), rgba(5, 5, 5, 0.98));
+}
+
+.notification.warning {
+    border-left-color: #FFC107;
+    background: linear-gradient(to right, rgba(255, 193, 7, 0.4), rgba(5, 5, 5, 0.98));
+}
+
+.notification i {
+    font-size: 22px;
+    margin-right: 14px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+.notification.success i {
+    color: #4CAF50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.notification.error i {
+    color: #F44336;
+    text-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.notification.info i {
+    color: #2196F3;
+    text-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
+    background: rgba(33, 150, 243, 0.1);
+}
+
+.notification.warning i {
+    color: #FFC107;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.notification-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.notification-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notification-description {
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInTop {
+    from {
+        transform: translateY(-120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideOutTop {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120%);
+        opacity: 0;
+    }
+}
+
+.notification.hide {
+    animation: slideOut 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.notifications.top-left .notification.hide,
+.notifications.bottom-left .notification.hide,
+.notifications.center-left .notification.hide {
+    animation: slideOutLeft 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.notifications.top .notification.hide,
+.notifications.bottom .notification.hide {
+    animation: slideOutTop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform-origin: left;
+}
+
+.notification.success .progress-bar {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+}
+
+.notification.error .progress-bar {
+    background: linear-gradient(to right, #F44336, #e53935);
+}
+
+.notification.info .progress-bar {
+    background: linear-gradient(to right, #2196F3, #1e88e5);
+}
+
+.notification.warning .progress-bar {
+    background: linear-gradient(to right, #FFC107, #ffb300);
+}
+
+@keyframes progress {
+    from {
+        transform: scaleX(1);
+    }
+    to {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+} 
