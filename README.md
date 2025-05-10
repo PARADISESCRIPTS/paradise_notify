@@ -13,6 +13,10 @@ A modern, customizable notification system for FiveM servers with beautiful anim
 - 🔄 Auto-removal of old notifications
 - 🎯 Multiple notification positions support
 
+## Preview
+![image](https://github.com/user-attachments/assets/abc7acfa-d0c1-4395-8148-79a5e58423d4)
+
+
 ## Usage
 
 ### Client-side
