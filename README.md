@@ -8,9 +8,7 @@ A modern, customizable notification system for FiveM servers with beautiful anim
 - 🔊 Sound notifications
 - ⚡ Smooth animations
 - 🎯 Multiple notification positions
-- 🎮 Progress bar with pause on hover
 - 🎵 Customizable notification types
-- 🔄 Auto-removal of old notifications
 - 🎯 Multiple notification positions support
 
 ## Preview
